@@ -22,13 +22,13 @@ jobs:
       run: cargo test --verbose
     - name: Upload Artifact (linux)
       uses: actions/upload-artifact@v3.1.2
-      if: runner.os == "ubuntu"
+      if: runner.os == 'ubuntu'
       with:
         name: ahq-lang
         path: target/release/ahq-lang
     - name: Upload artifact (windows)
       uses: actions/upload-artifact@v3.1.2
-      if: runner.os == "windows"
+      if: runner.os == 'windows'
       with:
         name: ahq-lang
         path: target/release/ahq-lang.exe
