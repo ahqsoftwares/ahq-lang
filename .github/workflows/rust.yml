@@ -12,7 +12,12 @@ env:
 jobs:
   build:
 
-    runs-on: [ubuntu-latest, windows-latest]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
@@ -22,13 +27,13 @@ jobs:
       run: cargo test --verbose
     - name: Upload Artifact (linux)
       uses: actions/upload-artifact@v3.1.2
-      if: runner.os == 'ubuntu'
+      if: ${{ matrix.os }} == 'ubuntu-latest'
       with:
         name: ahq-lang
         path: target/release/ahq-lang
     - name: Upload artifact (windows)
       uses: actions/upload-artifact@v3.1.2
-      if: runner.os == 'windows'
+      if: ${{ matrix.os }} == 'windows-latest'
       with:
         name: ahq-lang
         path: target/release/ahq-lang.exe
