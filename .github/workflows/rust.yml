@@ -29,13 +29,11 @@ jobs:
       run: cargo build --release
     - name: Upload Artifact (linux)
       uses: actions/upload-artifact@v3.1.2
-      if: ${{ matrix.os }} == 'ubuntu-latest'
       with:
-        name: ahq-lang
+        name: ahq-lang-linux
         path: target/release/ahq-lang
     - name: Upload artifact (windows)
       uses: actions/upload-artifact@v3.1.2
-      if: ${{ matrix.os }} == 'windows-latest'
       with:
-        name: ahq-lang
+        name: ahq-lang-windows.exe
         path: target/release/ahq-lang.exe
